@@ -4,85 +4,617 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ABU Care Services</title>
+  <meta
+    name="description"
+    content="ABU Care Services provides professional aged care services delivered with compassion, dignity, and respect."
+  />
   <style>
+    :root {
+      --bg: #f4f7f6;
+      --surface: rgba(255, 255, 255, 0.78);
+      --surface-strong: rgba(255, 255, 255, 0.92);
+      --text: #16302d;
+      --muted: #5f6f6c;
+      --brand: #176b63;
+      --brand-dark: #0f4f49;
+      --accent: #dff2ee;
+      --border: rgba(23, 107, 99, 0.12);
+      --shadow: 0 24px 60px rgba(16, 34, 32, 0.12);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max-width: 1180px;
+    }
+
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #f7f8fa;
-      color: #1f2937;
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(23, 107, 99, 0.08), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(23, 107, 99, 0.08), transparent 26%),
+        linear-gradient(180deg, #f8fbfa 0%, #eff5f4 100%);
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
     }
 
-    .card {
+    .page-shell {
       width: 100%;
-      max-width: 700px;
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 56px 32px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 28px;
     }
 
-    .logo {
-      width: 96px;
-      height: 96px;
-      margin: 0 auto 24px;
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
       border-radius: 50%;
-      background: #0f766e;
-      color: #ffffff;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 380px;
+      height: 380px;
+      top: -160px;
+      right: -120px;
+      background: radial-gradient(circle, rgba(23, 107, 99, 0.18), transparent 68%);
+    }
+
+    .hero::after {
+      width: 300px;
+      height: 300px;
+      bottom: -140px;
+      left: -120px;
+      background: radial-gradient(circle, rgba(15, 79, 73, 0.12), transparent 68%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+      padding: 36px;
+    }
+
+    .brand-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(23, 107, 99, 0.08);
+      border-radius: 999px;
+    }
+
+    .brand-mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      box-shadow: 0 12px 24px rgba(23, 107, 99, 0.22);
+      flex-shrink: 0;
+    }
+
+    .brand-copy {
       display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-copy strong {
+      font-size: 0.98rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-copy span {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--brand-dark);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.3rem, 4.8vw, 4.6rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      max-width: 10ch;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 58ch;
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 999px;
+      text-decoration: none;
       font-weight: 700;
-      letter-spacing: 1px;
+      font-size: 0.96rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
 
-    h1 {
-      font-size: 36px;
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(23, 107, 99, 0.22);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--text);
+      border: 1px solid rgba(23, 107, 99, 0.12);
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+    }
+
+    .visual-card {
+      width: 100%;
+      max-width: 420px;
+      padding: 26px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, var(--surface-strong) 0%, rgba(255, 255, 255, 0.8) 100%);
+      border: 1px solid rgba(23, 107, 99, 0.12);
+      box-shadow: 0 22px 46px rgba(16, 34, 32, 0.1);
+    }
+
+    .visual-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .visual-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .visual-title {
+      min-width: 0;
+    }
+
+    .visual-title strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .visual-title span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: rgba(244, 249, 248, 0.95);
+      border: 1px solid rgba(23, 107, 99, 0.08);
+      border-radius: 18px;
+    }
+
+    .feature-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: rgba(23, 107, 99, 0.12);
+      color: var(--brand-dark);
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .feature-text strong {
+      display: block;
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+    }
+
+    .feature-text span {
+      display: block;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .section {
+      margin-top: 28px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 16px 40px rgba(16, 34, 32, 0.08);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 32px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section-header h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-header p {
+      margin: 0;
+      max-width: 58ch;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .service-card {
+      padding: 22px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7fbfa 100%);
+      border: 1px solid rgba(23, 107, 99, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 28px rgba(18, 45, 41, 0.08);
+    }
+
+    .service-badge {
+      width: 46px;
+      height: 46px;
       margin-bottom: 16px;
-      color: #111827;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(23, 107, 99, 0.1);
+      color: var(--brand-dark);
+      font-size: 1.1rem;
     }
 
-    p {
-      font-size: 18px;
+    .service-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.08rem;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .trust-item {
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: #f7fbfa;
+      border: 1px solid rgba(23, 107, 99, 0.08);
+      text-align: center;
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .trust-item span {
+      color: var(--muted);
+      font-size: 0.94rem;
       line-height: 1.6;
-      max-width: 540px;
-      margin: 0 auto;
-      color: #4b5563;
     }
 
-    @media (max-width: 640px) {
-      .card {
-        padding: 40px 24px;
+    .footer-note {
+      margin-top: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 980px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
       }
 
-      h1 {
-        font-size: 28px;
+      .hero h1 {
+        max-width: 100%;
       }
 
-      p {
-        font-size: 16px;
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .page-shell {
+        padding: 16px;
+      }
+
+      .hero-inner,
+      .section {
+        padding: 22px;
+      }
+
+      .brand-bar {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .services-grid,
+      .trust-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .visual-card {
+        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <main class="card">
-    <div class="logo">ABU</div>
-    <h1>ABU Care Services</h1>
-    <p>
-      Professional aged care services delivered with compassion, dignity, and respect.
-    </p>
-  </main>
+  <div class="page-shell">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="brand-bar">
+            <div class="brand-mark">ABU</div>
+            <div class="brand-copy">
+              <strong>ABU Care Services</strong>
+              <span>Aged Care Services</span>
+            </div>
+          </div>
+
+          <div class="eyebrow">Compassion • Dignity • Respect</div>
+
+          <h1>Professional aged care with a modern human touch.</h1>
+
+          <p>
+            ABU Care Services provides aged care support with compassion,
+            professionalism, and genuine respect for every individual. We are
+            committed to creating a calm, supportive, and trustworthy care experience.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#services" class="button button-primary">Explore Services</a>
+            <a href="#about" class="button button-secondary">Why Choose ABU</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="visual-card">
+            <div class="visual-header">
+              <div class="visual-logo">ABU</div>
+              <div class="visual-title">
+                <strong>ABU Care Services</strong>
+                <span>Clean, compassionate, and professional care presentation.</span>
+              </div>
+            </div>
+
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <div class="feature-text">
+                  <strong>Respectful support</strong>
+                  <span>Care delivered with dignity, warmth, and professionalism.</span>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon">★</div>
+                <div class="feature-text">
+                  <strong>Trusted service</strong>
+                  <span>A reliable and polished experience for clients and families.</span>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon">♥</div>
+                <div class="feature-text">
+                  <strong>People-first care</strong>
+                  <span>Support focused on comfort, wellbeing, and peace of mind.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="section-header">
+        <div>
+          <h2>Our Services</h2>
+          <p>
+            A modern and compassionate service approach designed to support comfort,
+            independence, and quality of life.
+          </p>
+        </div>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-badge">○</div>
+          <h3>Personal Support</h3>
+          <p>Daily care delivered with sensitivity, privacy, and respect for each individual.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-badge">⌂</div>
+          <h3>Domestic Assistance</h3>
+          <p>Practical help that creates a cleaner, safer, and more comfortable home environment.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-badge">↗</div>
+          <h3>Community Access</h3>
+          <p>Support that encourages confidence, connection, and participation in everyday life.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-badge">☼</div>
+          <h3>Companionship</h3>
+          <p>Meaningful social support that promotes emotional wellbeing and connection.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-badge">◆</div>
+          <h3>Flexible Care</h3>
+          <p>Care solutions tailored to individual preferences, routines, and support needs.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-badge">✓</div>
+          <h3>Quality-Focused Service</h3>
+          <p>A professional care experience built around consistency, trust, and dignity.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-header">
+        <div>
+          <h2>Why Choose ABU Care Services</h2>
+          <p>
+            We combine a calm, modern presentation with values that matter most in aged care:
+            trust, respect, consistency, and compassionate support.
+          </p>
+        </div>
+      </div>
+
+      <div class="trust-strip">
+        <div class="trust-item">
+          <strong>Compassionate</strong>
+          <span>Support shaped around empathy, patience, and kindness.</span>
+        </div>
+
+        <div class="trust-item">
+          <strong>Professional</strong>
+          <span>A polished and dependable service experience from first contact onward.</span>
+        </div>
+
+        <div class="trust-item">
+          <strong>Respectful</strong>
+          <span>Care that protects dignity and values each person as an individual.</span>
+        </div>
+      </div>
+
+      <p class="footer-note">
+        ABU Care Services is committed to delivering aged care support with compassion,
+        dignity, and respect.
+      </p>
+    </section>
+  </div>
 </body>
 </html>
+
+i send you the current code becaise now the website is rendering perfect but i want to change only the design to be look more premium and proffessional  and more representative than this and not only abu basic circle    only update the design dont change the text, and give me the full code updated 
